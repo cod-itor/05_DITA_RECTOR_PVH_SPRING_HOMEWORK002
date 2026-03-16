@@ -9,4 +9,5 @@ import java.util.List;
 public interface StudentService {
 
     List<Student> getAllStudent(Integer page, Integer size);
+    Student getStudentById(Long studentId);
 }

@@ -1,15 +1,16 @@
 package com.HRD.DitaRector.PVH.Spring.service.impl;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Student;
+import com.HRD.DitaRector.PVH.Spring.repository.StudentRepository;
 import com.HRD.DitaRector.PVH.Spring.service.StudentService;
 
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
-    private final StudentService studentService;
+    private final StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentService studentService){
-        this.studentService = studentService;
+    public StudentServiceImpl(StudentRepository studentRepository){
+        this.studentRepository = studentRepository;
 
     }
 
@@ -17,6 +18,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudent(Integer page , Integer size){
         Integer offset = size*(page-1);
-        return studentService.getAllStudent(offset, size);
+        return studentRepository.getAllStudent(offset, size);
+    }
+    @Override
+    public Student getStudentById(Long studentId){
+        return studentRepository.getStudentById(studentId);
     }
  }

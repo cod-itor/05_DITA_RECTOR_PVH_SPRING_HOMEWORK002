@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,5 +16,6 @@ public class Student {
     private String studentName;
     private String email;
     private String phoneNumber;
+    private List<Course> courseList;
 
 }
