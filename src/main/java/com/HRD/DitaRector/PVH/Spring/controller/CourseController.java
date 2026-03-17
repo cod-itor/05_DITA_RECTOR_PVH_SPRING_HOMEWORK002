@@ -5,10 +5,7 @@ import com.HRD.DitaRector.PVH.Spring.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,11 @@ public class CourseController {
     public ResponseEntity<List<Course>> getAllCourse(@RequestParam Integer page , @RequestParam Integer size ){
         return ResponseEntity.ok(courseService.getAllCourse(page , size));
 
+    }
+    @Operation(summary = "Get Instructor By ID")
+    @GetMapping("/{course_id}")
+    public ResponseEntity<Course> getUserById(@PathVariable("course_id") Long courseId){
+        return ResponseEntity.ok(courseService.getCourseById(courseId));
     }
 
 }
