@@ -29,7 +29,7 @@ public class CourseController {
 
     @Operation(summary = "Get Instructor By ID")
     @GetMapping("/{course_id}")
-    public ResponseEntity<Course> getUserById(@PathVariable("course_id") Long courseId) {
+    public ResponseEntity<List<Course>> getUserById(@PathVariable("course_id") Long courseId) {
         return ResponseEntity.ok(courseService.getCourseById(courseId));
     }
 //    @Operation(summary = "Post Instructor By Id")
