@@ -1,7 +1,9 @@
 package com.HRD.DitaRector.PVH.Spring.repository;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Request.InstructorRequest;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 @Mapper
@@ -21,4 +23,6 @@ public interface InstructorRepository {
 
     @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
     void deleteUserById(Long instructorId);
+@Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
+    List<Instructor> createInstructor(@Param("req") InstructorRequest instructorRequest);
 }

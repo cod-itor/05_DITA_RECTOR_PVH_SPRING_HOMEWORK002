@@ -1,6 +1,7 @@
 package com.HRD.DitaRector.PVH.Spring.controller;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Request.InstructorRequest;
 import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.service.InstructorService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,11 +36,12 @@ public class InstructorController {
         instructorService.deleteUserById(instructorId);
 
     }
+    @Operation(summary = "Create Instructor By ID ")
+    @PostMapping
+    public ResponseEntity<List<Instructor>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
 
-
-
-
-//    @Operation(summary = "Create Instructor By ID ")
+        return ResponseEntity.ok(instructorService.createInstructor(instructorRequest));
+        }
 //    @Operation(summary = "Update Instructor By ID ")
 
 

@@ -1,6 +1,7 @@
 package com.HRD.DitaRector.PVH.Spring.service.impl;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Request.InstructorRequest;
 import com.HRD.DitaRector.PVH.Spring.repository.InstructorRepository;
 import com.HRD.DitaRector.PVH.Spring.service.InstructorService;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void deleteUserById(Long instructorId) {
          instructorRepository.deleteUserById(instructorId);
+    }
+
+    @Override
+    public List<Instructor> createInstructor(InstructorRequest instructorRequest) {
+        return instructorRepository.createInstructor(instructorRequest);
     }
 
 
