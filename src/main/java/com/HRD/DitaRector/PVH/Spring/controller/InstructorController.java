@@ -26,20 +26,14 @@ public class InstructorController {
     @Operation(summary = "Get All instructors")
     @GetMapping
     public ResponseEntity< ApiResponse<List<Instructor>>> getAllInstructor(@RequestParam Integer page , @RequestParam Integer size ){
-        List<Instructor> getAllInstructor = instructorService.getAllInstructor(page, size);
-        ApiResponse<List<Instructor>> response = ApiResponse.<List<Instructor>>builder()
-                .success(true)
-                .status(HttpStatus.OK)
-                .messages("Instructor fetched successfully")
-                .payload(getAllInstructor)
-                .timestamp(Instant.now())
-                .build();
+        ApiResponse<List<Instructor>> response = instructorService.getAllInstructor(page, size);
         return ResponseEntity.ok(response);
 
     }
     @Operation(summary = "Get instructor by ID")
     @GetMapping("{instructor-id}")
-    public ResponseEntity<List<Instructor>> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+    public ResponseEntity<Instructor> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+
         return ResponseEntity.ok(instructorService.getInstructorById(instructorId));
     }
     @Operation(summary = "Delete Instructor By ID ")

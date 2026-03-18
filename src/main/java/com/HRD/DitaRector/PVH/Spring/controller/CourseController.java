@@ -1,6 +1,8 @@
 package com.HRD.DitaRector.PVH.Spring.controller;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Course;
+import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Request.CourseRequest;
 import com.HRD.DitaRector.PVH.Spring.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
@@ -30,4 +32,10 @@ public class CourseController {
     public ResponseEntity<Course> getUserById(@PathVariable("course_id") Long courseId) {
         return ResponseEntity.ok(courseService.getCourseById(courseId));
     }
+//    @Operation(summary = "Post Instructor By Id")
+//    @PostMapping("/{course_id}")
+//    public ResponseEntity<List<Course>> createCourseById(@PathVariable("course_id") Long courseId, @RequestBody CourseRequest courseRequest){
+//        return ResponseEntity.ok(courseService.createCourse(courseRequest));
+//
+//    }
 }

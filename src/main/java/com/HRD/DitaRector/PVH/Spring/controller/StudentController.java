@@ -23,14 +23,13 @@ public class StudentController {
         this.studentService = studentService;
 
     }
-
     @Operation(summary = "Get All students")
     @GetMapping
     public ResponseEntity<ApiResponse<List<Student>>> getAllStudent(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         List<Student> studentList = studentService.getAllStudent(page, size);
         ApiResponse<List<Student>> response = ApiResponse.<List<Student>>builder()
                 .success(true)
-                .status(HttpStatus.OK)
+                .status(200)
                 .messages("Students retrieved successfully")
                 .payload(studentList)
                 .timestamp(Instant.now())
@@ -44,7 +43,7 @@ public class StudentController {
         if(studentById != null){
             ApiResponse<Student> response = ApiResponse.<Student>builder()
                     .success(true)
-                    .status(HttpStatus.OK)
+                    .status(200)
                     .messages("Students fetched successfully")
                     .payload(studentById)
                     .timestamp(Instant.now())
@@ -53,7 +52,7 @@ public class StudentController {
         }else {
             ApiResponse<Student> response = ApiResponse.<Student>builder()
                     .success(true)
-                    .status(HttpStatus.OK)
+                    .status(200)
                     .messages("No students found with the given ID")
                     .payload(null)
                     .timestamp(Instant.now())
@@ -69,7 +68,7 @@ public class StudentController {
         if(newStudent != null){
             ApiResponse<Student> response = ApiResponse.<Student>builder()
                     .success(true)
-                    .status(HttpStatus.OK)
+                    .status(200)
                     .messages("Students fetched successfully")
                     .payload(newStudent)
                     .timestamp(Instant.now())
@@ -78,7 +77,7 @@ public class StudentController {
         }else {
             ApiResponse<Student> response = ApiResponse.<Student>builder()
                     .success(false)
-                    .status(HttpStatus.NOT_FOUND)
+                    .status(400)
                     .messages("No students found with the given ID")
                     .payload(null)
                     .timestamp(Instant.now())
