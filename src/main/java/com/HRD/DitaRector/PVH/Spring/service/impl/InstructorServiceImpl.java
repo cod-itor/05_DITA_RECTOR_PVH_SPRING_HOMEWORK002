@@ -33,6 +33,10 @@ public class InstructorServiceImpl implements InstructorService {
     public List<Instructor> createInstructor(InstructorRequest instructorRequest) {
         return instructorRepository.createInstructor(instructorRequest);
     }
+    @Override
+    public Instructor updateInstructor(Long instructorId, InstructorRequest instructorRequest){
+        return instructorRepository.updateInstructor(instructorId, instructorRequest);
+    }
 
 
 }

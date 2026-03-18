@@ -25,4 +25,7 @@ public interface InstructorRepository {
     void deleteUserById(Long instructorId);
 @Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
     List<Instructor> createInstructor(@Param("req") InstructorRequest instructorRequest);
+@Select("UPDATE instrutors SET instructor_name = #{req.instructorName} , email = #{req.email} WHERE instructor_id = #{req.instructorId} ;")
+    Instructor updateInstructor(@Param("req") Long instructorId, InstructorRequest instructorRequest);
 }
+

@@ -15,4 +15,6 @@ Instructor getInstructorById(Long instructorId);
     void deleteUserById(Long instructorId);
 
     List<Instructor> createInstructor(InstructorRequest instructorRequest);
+
+    Instructor updateInstructor(Long instructorId, InstructorRequest instructorRequest);
 }

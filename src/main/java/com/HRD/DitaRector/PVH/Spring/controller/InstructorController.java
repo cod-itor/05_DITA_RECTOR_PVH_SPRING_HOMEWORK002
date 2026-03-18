@@ -42,8 +42,12 @@ public class InstructorController {
 
         return ResponseEntity.ok(instructorService.createInstructor(instructorRequest));
         }
-//    @Operation(summary = "Update Instructor By ID ")
+    @Operation(summary = "Update Instructor By ID ")
+    @PutMapping("{instructor-id}")
+    public ResponseEntity<Instructor> updateInstructor(@PathVariable("instructor-id") Long instructorId , @RequestBody InstructorRequest instructorRequest ){
 
+        return ResponseEntity.ok(instructorService.updateInstructor(instructorId ,instructorRequest));
+    }
 
 
 }
