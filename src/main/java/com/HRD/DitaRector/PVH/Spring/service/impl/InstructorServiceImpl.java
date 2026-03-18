@@ -23,6 +23,10 @@ public class InstructorServiceImpl implements InstructorService {
         return instructorRepository.getInstructorById(instructorId);
     }
 
+    @Override
+    public void deleteUserById(Long instructorId) {
+         instructorRepository.deleteUserById(instructorId);
+    }
 
 
 }

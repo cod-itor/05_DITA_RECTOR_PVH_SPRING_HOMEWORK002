@@ -10,4 +10,6 @@ public interface InstructorService {
 
 List<Instructor> getAllInstructor(Integer page , Integer size);
 Instructor getInstructorById(Long instructorId);
+
+    void deleteUserById(Long instructorId);
 }

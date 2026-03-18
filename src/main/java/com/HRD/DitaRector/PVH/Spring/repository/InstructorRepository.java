@@ -17,4 +17,8 @@ public interface InstructorRepository {
 @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
     Instructor getInstructorById(Long instructorId);
+
+
+    @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
+    void deleteUserById(Long instructorId);
 }

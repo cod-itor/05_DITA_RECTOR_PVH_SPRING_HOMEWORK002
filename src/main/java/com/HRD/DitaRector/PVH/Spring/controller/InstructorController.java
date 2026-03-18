@@ -1,6 +1,7 @@
 package com.HRD.DitaRector.PVH.Spring.controller;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.service.InstructorService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,18 @@ public class InstructorController {
     public ResponseEntity<Instructor> getInstructorById(@PathVariable("instructor-id") Long instructorId){
         return ResponseEntity.ok(instructorService.getInstructorById(instructorId));
     }
+    @Operation(summary = "Delete Instructor By ID ")
+    @DeleteMapping("{instructor-id}")
+    public void deleteInstructorById(@PathVariable("instructor-id") Long instructorId ){
+        instructorService.deleteUserById(instructorId);
+
+    }
+
+
+
+
+//    @Operation(summary = "Create Instructor By ID ")
+//    @Operation(summary = "Update Instructor By ID ")
 
 
 
