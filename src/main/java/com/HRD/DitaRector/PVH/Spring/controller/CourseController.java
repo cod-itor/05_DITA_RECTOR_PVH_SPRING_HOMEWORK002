@@ -6,6 +6,7 @@ import com.HRD.DitaRector.PVH.Spring.model.Request.CourseRequest;
 import com.HRD.DitaRector.PVH.Spring.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class CourseController {
 
     @Operation(summary = "Get All course")
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourse(@RequestParam Integer page, @RequestParam Integer size) {
+    public ResponseEntity<List<Course>> getAllCourse(@RequestParam @DefaultValue("10") Integer page, @RequestParam @DefaultValue("10") Integer size) {
         return ResponseEntity.ok(courseService.getAllCourse(page, size));
 
     }

@@ -24,7 +24,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getCourseById(Long courseId) {
-        return courseRepository.getCourseByID(courseId);
+        return courseRepository.getCourseById(courseId);
     }
 
 

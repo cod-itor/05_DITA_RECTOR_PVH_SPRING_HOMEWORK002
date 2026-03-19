@@ -10,12 +10,17 @@ public interface CourseRepository {
     @Results(id = "courseMapper", value = {
             @Result(property = "courseId" , column = "course_id"),
             @Result(property = "courseName" , column = "course_name"),
-            @Result(property = "instructionList " ,column = "instructor_id",one =  @One(select = "com.HRD.DitaRector.PVH.Spring.repository.InstructorRepository.getInstructorById")),
+            @Result(property = "instructorList" ,column = "course_id",one =  @One(select = "com.HRD.DitaRector.PVH.Spring.repository.InstructorRepository.getInstructorById")),
     })
-    @Select(
-    "SELECT *  FROM courses OFFSET #{offset} LIMIT #{size}")
+@Select(
+"SELECT *  FROM courses OFFSET #{offset} LIMIT #{size}")
     List<Course> getAllCourse(Integer offset, Integer size);
 @ResultMap("courseMapper")
 @Select("SELECT * FROM courses WHERE course_id = #{courseId}")
-    List<Course> getCourseByID(Long courseId);
+    List<Course> getCourseById(Long courseId);
 }
+
+
+
+
+//@Select("SELECT c.* FROM courses c JOIN student_course sc ON c.course_id = sc.course_id WHERE sc.student_id = #{studentId}")
