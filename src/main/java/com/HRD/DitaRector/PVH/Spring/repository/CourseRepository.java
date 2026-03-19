@@ -18,9 +18,10 @@ public interface CourseRepository {
 @ResultMap("courseMapper")
 @Select("SELECT * FROM courses WHERE course_id = #{courseId}")
     List<Course> getCourseById(Long courseId);
+
+
+    @ResultMap("courseMapper")
+    @Select("SELECT * FROM courses WHERE course_id IN (SELECT course_id FROM student_course WHERE student_id = #{studentId})")
+    List<Course> getCoursesByStudentId(Long studentId);
 }
 
-
-
-
-//@Select("SELECT c.* FROM courses c JOIN student_course sc ON c.course_id = sc.course_id WHERE sc.student_id = #{studentId}")

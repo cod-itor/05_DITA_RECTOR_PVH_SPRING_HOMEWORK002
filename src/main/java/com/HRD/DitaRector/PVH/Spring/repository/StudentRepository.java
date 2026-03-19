@@ -12,7 +12,7 @@ public interface StudentRepository {
         @Result(property = "studentId", column = "student_id"),
         @Result(property = "studentName", column = "student_name"),
         @Result(property = "phoneNumber",column = "phone_number"),
-        @Result(property =  "courseList" , column = "student_id",many = @Many (select = "com.HRD.DitaRector.PVH.Spring.repository.CourseRepository.getCourseById"))
+        @Result(property =  "courseList" , column = "student_id",many = @Many (select = "com.HRD.DitaRector.PVH.Spring.repository.CourseRepository.getCoursesByStudentId"))
 
 //        @Result(property = "courseList" , column = )
 })
