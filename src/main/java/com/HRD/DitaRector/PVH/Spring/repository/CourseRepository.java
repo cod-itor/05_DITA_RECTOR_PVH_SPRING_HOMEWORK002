@@ -30,5 +30,10 @@ public interface CourseRepository {
 @ResultMap("courseMapper")
 @Select("INSERT INTO courses VALUES (default,#{req.courseName},#{req.description} ,#{req.instructorId}) RETURNING *" )
     List<Course> createCourse(@Param("req") CourseRequest courseRequest);
+
+
+    @Delete("DELETE FROM courses WHERE course_id = #{courseId}")
+    int deleteCourseById(Long courseId);
+
 }
 
