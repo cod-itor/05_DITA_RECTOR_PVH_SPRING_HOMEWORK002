@@ -52,5 +52,24 @@ public class CourseServiceImpl implements CourseService {
                 .build();
     }
 
+    @Override
+    public ApiResponse<Void> deleteCourseById(Long courseId) {
+        int rowsDeleted = courseRepository.deleteCourseById(courseId);
+        if (rowsDeleted > 0) {
+            return ApiResponse.<Void>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Course deleted successfully")
+                    .timestamp(Instant.now())
+                    .build();
+        }
+        return ApiResponse.<Void>builder()
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No courses found with the given ID")
+                .timestamp(Instant.now())
+                .build();
+    }
+
 
 }

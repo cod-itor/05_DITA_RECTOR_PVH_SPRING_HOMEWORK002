@@ -40,4 +40,11 @@ public class CourseController {
         return ResponseEntity.ok(courseService.createCourse(courseRequest));
 
     }
+    @Operation(summary = "Delete Course By Id")
+    @DeleteMapping("{course-id}")
+    public ResponseEntity<ApiResponse<Void>> deleteCourseById(@PathVariable("course-id") Long courseId){
+        ApiResponse<Void> response = courseService.deleteCourseById(courseId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+
+    }
 }
