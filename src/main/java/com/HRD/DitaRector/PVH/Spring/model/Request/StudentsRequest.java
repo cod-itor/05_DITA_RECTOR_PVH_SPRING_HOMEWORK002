@@ -1,16 +1,20 @@
 package com.HRD.DitaRector.PVH.Spring.model.Request;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentsRequest {
+    private Long studentId;
     private String studentName;
     private String email;
     private String phoneNumber;
-    private List<Long> courseId;
+    private List<Integer> courseIds;
 }

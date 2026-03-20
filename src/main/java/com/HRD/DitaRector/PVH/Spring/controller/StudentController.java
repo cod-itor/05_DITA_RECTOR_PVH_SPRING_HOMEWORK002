@@ -6,8 +6,6 @@ import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 
-import org.apache.coyote.Response;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,18 +34,25 @@ public class StudentController {
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @Operation(summary = "Create a new Student")
+    @Operation(summary = "Create A New Student")
     @PostMapping
-    public ResponseEntity<ApiResponse<List<Student>>> createStudent(@RequestBody StudentsRequest studentsRequest){
-        ApiResponse<List<Student>> response = studentService.createStudent(studentsRequest);
-            return ResponseEntity.status(response.getStatus()).body(response);
-
-
+    public ResponseEntity<ApiResponse<Student>> createStudent(
+            @RequestBody StudentsRequest studentsRequest) {
+        ApiResponse<Student> response = studentService.createStudent(studentsRequest);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
     @Operation(summary = "Delete student by ID")
     @DeleteMapping("{student-id}")
     public ResponseEntity<ApiResponse<Void>> deleteStudentById(@PathVariable("student-id") Long studentId){
         ApiResponse<Void> response = studentService.deleteStudentById(studentId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    @Operation(summary = "Update Student By ID")
+    @PutMapping("{student-id}")
+    public ResponseEntity<ApiResponse<Student>> updateStudentById(
+            @PathVariable("student-id") Long studentId,
+            @RequestBody StudentsRequest studentsRequest) {
+        ApiResponse<Student> response = studentService.updateStudentById(studentId, studentsRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

@@ -52,25 +52,33 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ApiResponse<List<Student>> createStudent(StudentsRequest studentsRequest) {
-        List<Student> students = studentRepository.createStudent(studentsRequest);
-        if(students != null){
-            return  ApiResponse.<List<Student>>builder()
-                    .success(true)
-                    .status(HttpStatus.CREATED.value())
-                    .messages("Students fetched successfully")
-                    .payload(students)
-                    .timestamp(Instant.now())
-                    .build();
-        }else{
-            return ApiResponse.<List<Student>>builder()
+    public ApiResponse<Student> createStudent(StudentsRequest studentsRequest) {
+        Long newStudentId = studentRepository.insertStudent(studentsRequest);
+
+        if (newStudentId == null) {
+            return ApiResponse.<Student>builder()
                     .success(false)
                     .status(HttpStatus.BAD_REQUEST.value())
-                    .messages("No students found with the given ID")
+                    .messages("Failed to create student")
                     .payload(null)
                     .timestamp(Instant.now())
                     .build();
         }
+
+        if (studentsRequest.getCourseIds() != null && !studentsRequest.getCourseIds().isEmpty()) {
+            for (Integer courseId : studentsRequest.getCourseIds()) {
+                studentRepository.insertStudentCourse(newStudentId, courseId);
+            }
+        }
+
+        Student created = studentRepository.getStudentWithCoursesById(newStudentId);
+        return ApiResponse.<Student>builder()
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .messages("Student created successfully")
+                .payload(created)
+                .timestamp(Instant.now())
+                .build();
     }
     @Override
     public ApiResponse<Void> deleteStudentById(Long studentId){
@@ -92,6 +100,37 @@ public class StudentServiceImpl implements StudentService {
                     .build();
 
         }
+
+    @Override
+    public ApiResponse<Student> updateStudentById(Long studentId, StudentsRequest studentsRequest) {
+        int rows = studentRepository.updateStudentById(studentId, studentsRequest);
+
+        if (rows == 0) {
+            return ApiResponse.<Student>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("No student found with the given ID")
+                    .payload(null)
+                    .timestamp(Instant.now())
+                    .build();
+        }
+
+        if (studentsRequest.getCourseIds() != null & !studentsRequest.getCourseIds().isEmpty()) {
+            studentRepository.deleteStudentRelated(studentId);
+            for (Integer courseId : studentsRequest.getCourseIds()) {
+                studentRepository.insertStudentCourse(studentId, courseId);
+            }
+        }
+
+        Student updated = studentRepository.getStudentWithCoursesById(studentId);
+        return ApiResponse.<Student>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .messages("Student updated successfully")
+                .payload(updated)
+                .timestamp(Instant.now())
+                .build();
+    }
 
 }
 
